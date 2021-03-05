@@ -12,4 +12,6 @@ npm install sweetalert2 --save
 
 //Dependências globais
 npm install nodemon -g
-já está instalado globalmente
+
+//Inicia servidor
+nodemon index.js

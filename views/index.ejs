@@ -18,7 +18,7 @@
                     </div>
                     <div class="card-body">
                         <p><%= perguntas.descricao %></p>
-                        <button class="btn btn-warning float-right"> Responder </button>
+                        <a href="/pergunta/<%= perguntas.id %>"><button class="btn btn-warning float-right"> Responder </button></a>
                     </div>
                 </div>      
             <% }) %>

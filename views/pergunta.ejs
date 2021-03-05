@@ -1,0 +1,48 @@
+<%- include ('./components/header.ejs') %>
+
+<body>
+
+    <%- include ('./components/navbar.ejs') %>
+
+    <div class="container mt-5">
+        <div class="container">
+            <h1 class="text-white mb-4"><%= pergunta.titulo %></h1>
+            <h3 class="text-white mb-4"><%= pergunta.descricao %></h3>
+        </div> 
+
+        <div class="container">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3 class="text-info float-left">Adicionar nova resposta</h1>
+                </div>
+                <div class="card-body">
+                    <form action="/responder" method="post">
+                        <input class="form-control" type="hidden" name="perguntaId" value="<%= pergunta.id %>">
+                        <input class="form-control mb-3" type="text" name="usuario" placeholder="Digite seu nome de usuário" value="">
+                        <textarea class="form-control mb-3" placeholder="Digite sua resposta aqui" name="corpo" rows="4"></textarea>
+                        <button class="btn btn-success float-right" type="submit">Responder</button>
+                    </form>
+                </div>
+            </div>      
+        </div>
+
+        <div class="container">     
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3 class="text-info float-left">Respostas</h1>
+                </div>
+                <div class="card-body">
+                    <% respostas.forEach(respostas => { %>
+                        <h5 class="text-info mb-2"><%= respostas.usuario %></h5>
+                        <p><%= respostas.corpo %></p>
+                        <hr class="border-lightBlue">
+                    <% }) %>
+                </div>
+            </div>         
+        </div>
+            
+    </div>
+
+</body>
+
+<%- include ('./components/footer.ejs') %>

@@ -21,6 +21,7 @@ connection.authenticate()
         console.log(msgError);
     })
 const Perguntas = require("./database/Perguntas"); //Carregando model
+const Respostas = require("./database/Respostas"); //Carregando model
 
 //Rotas
 app.get("/", function(req, res){
@@ -46,6 +47,40 @@ app.post("/salvarpergunta", function(req, res){
         res.redirect('/');
     });
 })
+
+app.get("/pergunta/:id",(req, res) => {
+    var id = req.params.id;
+    Perguntas.findOne({
+        where: {id: id},
+    }).then(pergunta =>{
+        if(pergunta != undefined){
+            Respostas.findAll({
+                where: {perguntaId: id},
+                order: [['id','DESC']]
+            }).then(respostas =>{
+                res.render("pergunta", {
+                    pergunta: pergunta,
+                    respostas: respostas
+                });
+            });
+        }else{
+            res.redirect("/");
+        }
+    });
+})
+
+app.post("/responder", (req, res) => {
+    var corpo = req.body.corpo;
+    var perguntaId = req.body.perguntaId; 
+    var usuario = req.body.usuario; 
+    Respostas.create({
+        usuario: usuario,
+        corpo: corpo,
+        perguntaId: perguntaId
+    }).then(() => {
+        res.redirect('/pergunta/' + perguntaId);
+    });
+});
 
 //Iniciando servidor
 app.listen(4000,()=>{
