@@ -11,19 +11,27 @@
         </div> 
 
         <div class="container">
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h3 class="text-info float-left">Adicionar nova resposta</h1>
-                </div>
-                <div class="card-body">
-                    <form action="/responder" method="post">
-                        <input class="form-control" type="hidden" name="perguntaId" value="<%= pergunta.id %>">
-                        <input class="form-control mb-3" type="text" name="usuario" placeholder="Digite seu nome de usuário" value="">
-                        <textarea class="form-control mb-3" placeholder="Digite sua resposta aqui" name="corpo" rows="4"></textarea>
-                        <button class="btn btn-success float-right" type="submit">Responder</button>
-                    </form>
-                </div>
-            </div>      
+            <button class="btn btn-success btn-block mb-3" type="button" data-toggle="collapse" data-target="#collapseContainerResposta" aria-expanded="false" aria-controls="collapseContainerResposta">
+                Enviar uma nova resposta
+            </button>
+        </div>
+
+        <div class="collapse" id="collapseContainerResposta">
+            <div class="container">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h3 class="text-info float-left">Adicionar nova resposta</h1>
+                    </div>
+                    <div class="card-body">
+                        <form action="/responder" method="post">
+                            <input class="form-control" type="hidden" name="perguntaId" value="<%= pergunta.id %>">
+                            <input class="form-control mb-3" type="text" name="usuario" placeholder="Digite seu nome de usuário" value="">
+                            <textarea class="form-control mb-3" placeholder="Digite sua resposta aqui" name="corpo" rows="4"></textarea>
+                            <button class="btn btn-success float-right" type="submit">Responder</button>
+                        </form>
+                    </div>
+                </div>      
+            </div>
         </div>
 
         <div class="container">     
@@ -46,3 +54,9 @@
 </body>
 
 <%- include ('./components/footer.ejs') %>
+
+<script>
+$('#collapseContainerResposta').collapse({
+    toggle: false
+})
+</script>
